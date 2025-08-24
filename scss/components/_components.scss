@@ -1,0 +1,232 @@
+@import "../mixins/mixins-master";
+
+section {
+  padding-block: rem(40);
+}
+
+.container {
+  width: min(calc(100% - rem(40)), rem(1100));
+  margin: auto;
+
+  &.fullOnMobile {
+    width: min(100%, rem(1100)); // Mobile width first
+
+    @include lg-up {
+      width: min(calc(100% - rem(40)), rem(1100));
+    }
+  }
+}
+
+.container-content {
+  @include lg-up {
+    width: min(calc(100% - rem(40)), rem(1100));
+  }
+  width: min(calc(100% - rem(40)), rem(380));
+  margin: auto;
+}
+
+.btns-wrp {
+  display: flex;
+  justify-content: center; // Mobile alignment first
+  width: 100%;
+  @include md-up {
+    justify-content: flex-start;
+  }
+}
+
+.btn-item {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-self: flex-start;
+}
+
+.btn {
+  padding: rem(16) rem(20); // Mobile padding first
+  color: $color__site-white;
+  display: inline-block;
+  background-color: $color__site-primary;
+  text-align: center;
+  font-size: rem(16);
+  line-height: 1;
+  border-radius: rem(100);
+  transition: 0.3s all ease;
+  font-weight: bold;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+  @include sm {
+    width: 100%;
+  }
+
+  &:not(.hover-dark) {
+    &:hover {
+      background-color: $color__site-secondary;
+      color: $color__site-white;
+      box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  &.hover-dark {
+    &:hover {
+      background-color: darken($color__site-primary, 10%);
+    }
+  }
+
+  &--secondary {
+    background-color: $color__site-secondary;
+    color: $color__site-white;
+
+    &:hover:not(.hover-dark) {
+      color: $color__site-white;
+      background-color: $color__site-primary;
+    }
+
+    &.hover-dark {
+      &:hover {
+        background-color: darken($color__site-secondary, 10%);
+      }
+    }
+  }
+}
+
+// General accordion items
+.accordion-container {
+  display: flex;
+  flex-direction: column;
+  gap: rem(20);
+}
+
+details {
+  summary {
+    padding: rem(20) 0;
+    font-size: 0;
+
+    &::marker {
+      display: none;
+    }
+  }
+
+  .accordion__quesion {
+    cursor: pointer;
+    position: relative;
+    padding-right: rem(30);
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+      width: calc(100% - rem(20));
+      bottom: -1px;
+      height: rem(1);
+      background-color: #D6D6D6;
+      left: 0;
+    }
+
+    @include md-up {
+      padding-right: rem(70);
+    }
+
+    h3 {
+      font-size: rem(14); // Mobile font size first
+      line-height: 1; // Mobile line height first
+      padding-right: rem(40); // Mobile padding first
+
+      @include md-up {
+        padding-right: 0;
+      }
+
+      &::before,
+      &::after {
+        content: " ";
+        width: 14px;
+        height: rem(2.5);
+        display: inline-block;
+        position: absolute;
+        right: rem(30);
+        transform: none; // Mobile transform first
+        transition: 0.3s all ease;
+        background-color: $color__body-text;
+        border-radius: 1px;
+        z-index: 1;
+        top: 50%;
+
+        @include md-up {
+          top: 50%;
+          transform: translateY(-50%);
+        }
+      }
+
+      &::after {
+        rotate: 90deg;
+        top: 49%;
+        transform: translateY(-50%);
+      }
+
+      &::before {
+        transform: translateX(1px) translateY(-50%);;
+      }
+    }
+  }
+
+  .accordion__answer {
+    position: relative;
+    background-color: #003366;
+    color: $color__site-white;
+
+    p,
+    ul li,
+    a {
+      font-size: rem(17);
+    }
+
+    ul {
+      list-style: disc;
+      padding-left: rem(20);
+    }
+  }
+
+  &.accordion__item {
+    span.icon {
+      position: absolute;
+      width: rem(30);
+      height: rem(30);
+      display: inline-block;
+      right: rem(20);
+      top: rem(20); // Mobile positioning first
+      transform: none; // Mobile transform first
+      border-radius: 50%;
+
+      @include md-up {
+        width: rem(35);
+        height: rem(36);
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+
+  &.accordion__item[open] {
+    .accordion__quesion{
+        &::after {
+            display: none;
+        }
+    }
+    .accordion__answer {
+      padding: rem(20);
+    }
+
+    h3 {
+      &::after {
+        rotate: 0deg;
+      }
+
+      &::before {
+        rotate: 0deg;
+        transform: none;
+
+        @include md-up {
+          transform: translateY(-50%);
+        }
+      }
+    }
+  }
+}

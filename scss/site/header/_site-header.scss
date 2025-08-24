@@ -1,0 +1,60 @@
+/*----------------------------------
+  HEADER STYLES
+  ---------------------------------------------------------------------------------*/
+header {
+  .header-wrapper {
+    padding-top: 22px;
+    padding-bottom: 14px;
+    display: flex;
+    justify-content: center;
+    @include lg-up {
+      justify-content: flex-start;
+    }
+
+    .logo {
+      img {
+        height: 28px;
+        width: auto;
+      }
+    }
+  }
+}
+
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: #F9F9F9;
+  .container{
+    width: 100%;
+    @include lg-up{
+      width: min(calc(100% - rem(40)), rem(1100));
+    }
+  }
+  .top-nav-wrapper {
+    overflow-x: auto;
+  }
+
+  ul {
+    display: flex;
+    align-items: center;
+
+    li {
+      a {
+        white-space: nowrap;
+        display: block;
+        padding: rem(10) rem(20);
+        border-bottom: 3px solid transparent;
+        font-size: rem(16);
+
+        &.active {
+          border-bottom-color: #BEDEFF;
+        }
+
+        @include lg-up {
+          padding: rem(10) rem(30);
+        }
+      }
+    }
+  }
+}

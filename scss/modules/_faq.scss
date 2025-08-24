@@ -1,0 +1,323 @@
+.faq {
+  &__title {
+    margin-bottom: rem(20);
+
+    h2 {
+      line-height: 120%;
+      @include md-up {
+        padding-right: 0;
+      }
+    }
+  }
+
+  overflow: hidden;
+  padding-bottom: 0;
+
+  .container {
+    width: min(calc(100% - rem(40)), rem(766));
+  }
+}
+
+.accordion {
+  .img-wrp {
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: rem(4);
+      overflow: hidden;
+    }
+  }
+
+  .embla__dot {
+    background-color: rgba(#fff, 0.3);
+
+    &.embla__dot--selected {
+      background-color: $color__site-white;
+    }
+  }
+
+  .embla__dots {
+    margin-top: rem(20);
+  }
+
+  .embla {
+    @include md-up {
+      width: calc(100% + rem(20));
+    }
+  }
+
+  .accordion__answer {
+    position: relative;
+
+    &::before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      height: 100%;
+      background-color: $color__site-primary-dark;
+    }
+
+    ul {
+      padding-left: 0;
+    }
+
+    h4 {
+      font-size: rem(34);
+      font-style: italic;
+      font-weight: 900;
+      line-height: 1.2;
+    }
+
+    p {
+      font-weight: 300;
+      font-size: rem(14);
+      line-height: 1.2;
+    }
+
+    .extra-light {
+      p {
+        font-weight: 200;
+      }
+    }
+
+    h5.sub-title {
+      font-weight: 900;
+      font-style: italic;
+      color: $color__site-secondary;
+      font-size: rem(16);
+      line-height: 1.2;
+    }
+
+    strong {
+      font-weight: 900;
+    }
+
+    &-container {
+      display: flex;
+      flex-direction: column;
+      gap: rem(20);
+      position: relative;
+      z-index: 2;
+    }
+
+    &-content {
+      display: flex;
+      flex-direction: column;
+      gap: rem(10);
+    }
+  }
+
+  .faq-price-card {
+    position: relative;
+    overflow: hidden;
+    background-color: #EAE7E4;
+    border-radius: rem(20);
+    padding: rem(35) rem(20);
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: rem(-77);
+      left: rem(-68);
+      width: rem(495);
+      height: rem(495);
+      border-radius: 50%;
+      display: block;
+      background-color: $color__site-secondary;
+    }
+
+    &__header {
+      position: relative;
+      z-index: 2;
+
+      &-content {
+        width: 160px;
+        text-align: center;
+        @include lg-up {
+          margin-left: 8vw;
+        }
+        margin-bottom: rem(-24);
+
+        p {
+          font-size: rem(10);
+          color: $color__site-primary-dark;
+          font-weight: 400;
+          line-height: 1.1;
+        }
+
+        h2 {
+          font-size: rem(24.2);
+          color: $color__site-primary-dark;
+          line-height: 1.1;
+          font-weight: 900;
+        }
+
+        h3 {
+          font-size: rem(24.2);
+          font-weight: 900;
+          line-height: 1.1;
+        }
+
+        h5 {
+          font-size: rem(22);
+          font-weight: 300;
+          line-height: 1.1;
+        }
+      }
+    }
+
+    &__body {
+      text-align: center;
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      gap: rem(28);
+
+      img {
+        max-width: 100%;
+        height: auto;
+        @include lg-up {
+          width: 390px;
+        }
+      }
+
+    }
+  }
+
+  .comfort-experience-details {
+    .grid-layout {
+      display: grid;
+      gap: 20px;
+
+      grid-template-columns: 1fr;
+      grid-template-areas:
+    "card1"
+    "card2"
+    "card3";
+
+      @include md-up {
+        grid-template-columns: 1fr 1fr;
+        grid-template-areas:
+      "card1 card1"
+      "card2 card3";
+      }
+
+      .card {
+        background: $color__site-white;
+        padding: rem(20);
+        border-radius: rem(10);
+
+        ul {
+          margin-top: rem(10);
+          gap: rem(10);
+
+          li {
+            font-size: rem(14);
+            line-height: rem(20);
+            font-weight: 600;
+            color: $color__site-primary-dark;
+
+          }
+        }
+
+        h3 {
+          font-weight: 900;
+          line-height: rem(22);
+          font-size: rem(18);
+          color: $color__site-secondary;
+          text-align: center;
+        }
+      }
+
+      .card-1 {
+        grid-area: card1;
+
+        h3 {
+          margin-block: rem(14);
+        }
+
+        p {
+          font-size: rem(14);
+          line-height: 1.2;
+          font-weight: 600;
+          color: $color__site-primary-dark;
+          max-width: rem(222);
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        a {
+          font-size: rem(14);
+          line-height: 1.2;
+          font-weight: 600;
+          display: block;
+          color: $color__site-secondary;
+          max-width: rem(222);
+          margin-left: auto;
+          margin-right: auto;
+          transition: color 0.3s ease-in-out;
+
+          &:hover {
+            color: $color__site-primary;
+          }
+        }
+
+        .card-1__grid {
+          padding-top: rem(20);
+          text-align: center;
+          display: grid;
+          grid-template-columns: repeat(1, 1fr);
+          gap: rem(20);
+
+          .img-block {
+            height: rem(100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: rem(10);
+          }
+
+          @include md-up {
+            grid-template-columns: repeat(3, 1fr);
+          }
+
+          img {
+            max-width: 100%;
+            height: auto;
+            object-fit: cover;
+          }
+        }
+      }
+
+      .card-2 {
+        grid-area: card2;
+      }
+
+      .card-3 {
+        grid-area: card3;
+      }
+    }
+  }
+
+  .results-gallery {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: rem(20);
+    max-width: rem(402);
+    margin-left: auto;
+    margin-right: auto;
+
+    .card-wrp {
+      padding: rem(20) rem(20) 0 rem(20);
+      display: flex;
+      flex-direction: column;
+      gap: rem(10);
+    }
+  }
+}

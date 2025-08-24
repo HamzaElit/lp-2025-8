@@ -1,0 +1,295 @@
+@import "../mixins/mixins-master";
+
+//Backgrounds
+
+.customBGimage,
+.customBGimageMobile {
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.customBGimage {
+  background-image: var(--bgImage);
+}
+
+.customBGimageMobile {
+  // Mobile-first approach - apply mobile background by default
+  background-image: var(--bgImageMobile);
+
+  @include md-up {
+    // Reset to default background for larger screens if needed
+    background-image: var(--bgImage);
+  }
+}
+
+.hideBgImageMobile {
+  background-image: none; // Mobile-first - hide by default
+
+  @include md-up {
+    background-image: var(--bgImage); // Show on larger screens
+  }
+}
+
+//Colors
+.colorPrimary {
+  color: $color__site-primary;
+}
+
+.colorSecondary {
+  color: $color__site-secondary;
+}
+
+//Alignment
+.textLeft {
+  text-align: left;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.textLeftMobile {
+  text-align: left; // Mobile-first - left aligned by default
+
+  @include md-up {
+    text-align: center; // Center on larger screens
+  }
+}
+
+.textCenterDesk {
+  @include md-up {
+    text-align: center;
+  }
+}
+
+.toCenterMobile {
+  justify-content: center; // Mobile-first - centered by default
+  align-items: center;
+
+  @include md-up {
+    justify-content: flex-start; // Reset for larger screens
+    align-items: flex-start;
+  }
+}
+
+.toCenter {
+  justify-content: center;
+  align-items: center;
+}
+
+.toEnd {
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.toStart {
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.toStartDesk {
+  justify-content: center; // Mobile-first default
+  align-items: center;
+
+  @include md-up {
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+}
+
+//Padding
+.paddingBlock-0 {
+  padding-block: 0;
+}
+
+.paddingTop-0 {
+  padding-top: 0;
+}
+
+.paddingBottom-0 {
+  padding-bottom: 0;
+}
+
+//Margin
+.marginTop-10 {
+  margin-top: rem(10);
+}
+
+//sizes
+.mw-mid {
+  width: min(100%, rem(700));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mw-lg {
+  width: min(100%, rem(850));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.mw-xl {
+  width: min(100%, rem(1030));
+  margin-left: auto;
+  margin-right: auto;
+}
+
+//General
+.desktop-only {
+  display: none; // Mobile-first - hidden by default
+
+  @include sm-up {
+    display: block; // Show on desktop
+  }
+}
+
+.mobile-only {
+  display: block; // Mobile-first - shown by default
+  &.justify-center {
+    display: flex;
+    @include md-up {
+      display: none;
+    }
+  }
+
+  @include md-up {
+    display: none;
+  }
+}
+
+.sm-only {
+  display: block; // Mobile-first - shown by default
+
+  @include sm-up {
+    display: none; // Hide on tablet and larger screens
+  }
+}
+
+.tablate-only {
+  display: block; // Mobile-first - hidden by default
+
+  @include md-up {
+    display: none; // Show on tablet and larger screens
+  }
+}
+
+.borderRadius-10 {
+  border-radius: rem(10);
+  overflow: hidden;
+}
+
+.content-slider-wrp {
+  width: 100%;
+  min-width: 0;
+}
+
+.fw-200 {
+  font-weight: 200 !important;
+}
+
+.fw-900 {
+  font-weight: 900;
+}
+
+.main-title {
+  font-size: rem(26);
+  font-weight: 900;
+  @include md-up {
+    font-size: rem(36);
+  }
+}
+
+.mb-3 {
+  margin-bottom: 1.5rem;
+  @include md-up {
+    margin-bottom: 2rem;
+  }
+}
+
+.mb-4 {
+  margin-bottom: 2rem;
+  @include md-up {
+    margin-bottom: 2.5rem;
+  }
+}
+
+.mb-5 {
+  margin-bottom: 2.5rem;
+  @include md-up {
+    margin-bottom: 3rem;
+  }
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.list-unstyled {
+  list-style: none !important;
+  padding: 0;
+  margin: 0;
+}
+
+.object-cover {
+  object-fit: cover;
+}
+
+.max-w-450 {
+  max-width: rem(450);
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.bg-lightGray {
+  background-color: $color__site-lightgray;
+}
+
+.white-dote {
+  .embla__nav {
+    .embla__dot {
+      border-color: $color__site-white;
+    }
+
+    .embla__dot--selected {
+      background-color: $color__site-white;
+    }
+  }
+}
+
+.marBottom-40 {
+  margin-bottom: rem(20);
+  @include lg-up {
+    margin-bottom: rem(40);
+  }
+}
+
+.mt-40 {
+  margin-top: rem(40);
+}
+
+.mt-20 {
+  margin-top: rem(20);
+}
+
+.max-w-100 {
+  max-width: 100%;
+}
+
+.text-primary {
+  color: $color__site-primary;
+}
+
+.switch-order-on-mobile {
+  display: flex;
+  flex-direction: column-reverse;
+  @include lg-up {
+    flex-direction: column;
+  }
+}

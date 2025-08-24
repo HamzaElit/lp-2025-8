@@ -1,0 +1,116 @@
+/*----------------------------------
+  SITE FOOTER STYLES
+  ---------------------------------------------------------------------------------*/
+
+.footer {
+  background-color: $color__site-primary-dark;
+  color: $color__site-white;
+  padding: rem(40) 0; // Mobile padding first
+
+  .container {
+    width: min(calc(100% - rem(40)), rem(766));
+    display: flex;
+    flex-direction: column;
+    gap: rem(30);
+  }
+
+  &__title {
+    p {
+      font-size: rem(16); // Mobile size first
+      line-height: 1;
+      font-style: italic;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr; // Mobile one column first
+    gap: rem(30);
+
+    @include lg-up {
+      grid-template-columns: 1fr 1fr; // Desktop two columns
+      align-items: start;
+      gap: rem(30);
+    }
+  }
+
+  &__contact {
+    h4 {
+      font-size: rem(16);
+      line-height: 1.2;
+      font-style: italic;
+      font-weight: 900;
+      margin: 0 0 rem(10);
+    }
+  }
+
+  &__tel {
+    display: flex;
+    align-items: baseline;
+    gap: rem(8);
+    margin: rem(10) 0;
+
+    a {
+      color: $color__site-white;
+      text-decoration: none;
+      font-weight: 900;
+      font-style: italic;
+
+      @include hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__email {
+    margin: 0;
+
+    a {
+      color: $color__site-white;
+      text-decoration: none;
+      font-weight: 900;
+      font-style: italic;
+
+      @include hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__hours {
+    display: grid;
+    gap: rem(10);
+
+    &-row {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: rem(16);
+      font-size: rem(16);
+      line-height: 1.2;
+      margin: 0;
+
+      span:last-child {
+        white-space: nowrap;
+      }
+    }
+  }
+
+  &__links {
+    display: flex;
+    gap: rem(10);
+    flex-wrap: wrap;
+
+    a {
+      color: $color__site-white;
+      text-decoration: underline; // As in design
+      font-size: rem(16);
+      font-weight: 300;
+
+      @include hover {
+        opacity: 0.85;
+      }
+    }
+  }
+}
+ 
