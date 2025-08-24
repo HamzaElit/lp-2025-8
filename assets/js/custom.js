@@ -154,3 +154,101 @@ document.addEventListener("DOMContentLoaded", () => {
   })
 
 });
+
+
+  // Smooth scroll and section link handling
+  const topNav = document.querySelector('.top-nav');
+  const topNavWrapper = document.querySelector('.top-nav .top-nav-wrapper');
+  const navLinks = Array.from(document.querySelectorAll('.top-nav .list-unstyled a'));
+
+  // Enable smooth scroll behavior
+  if (!document.documentElement.style.scrollBehavior) {
+    // Fallback for very old browsers (optional). Most modern browsers support CSS smooth behavior.
+  }
+
+  const getHeaderOffset = () => {
+    const stickyHeight = topNav ? topNav.offsetHeight : 0;
+    return stickyHeight + 10; // small padding
+  };
+
+  const sectionsMap = new Map();
+  const idForLink = (link) => (link.getAttribute('href') || '').replace('#', '');
+
+  navLinks.forEach((link) => {
+    const id = idForLink(link);
+    if (!id) return;
+    const target = document.getElementById(id);
+    if (target) sectionsMap.set(id, target);
+
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      e.preventDefault();
+      const targetEl = document.getElementById(id);
+      if (!targetEl) return;
+
+      const rect = targetEl.getBoundingClientRect();
+      const absoluteY = window.pageYOffset + rect.top - getHeaderOffset();
+      window.scrollTo({ top: absoluteY, behavior: 'smooth' });
+
+      // Update active state immediately
+      setActiveLink(link);
+
+      // On mobile: horizontally scroll nav so the clicked link is left-aligned
+      scrollNavLinkIntoView(link, 'start');
+    });
+  });
+
+  function setActiveLink(activeLink) {
+    navLinks.forEach((l) => l.classList.remove('active'));
+    if (activeLink) activeLink.classList.add('active');
+  }
+
+  function scrollNavLinkIntoView(link, block = 'nearest') {
+    if (!topNavWrapper || !link) return;
+    // If the nav is horizontally scrollable, align clicked link to left
+    const wrapperRect = topNavWrapper.getBoundingClientRect();
+    const linkRect = link.getBoundingClientRect();
+    const currentScroll = topNavWrapper.scrollLeft;
+    const offsetLeft = linkRect.left - wrapperRect.left + currentScroll;
+    // Leave a small padding on the left
+    const paddingLeft = 16;
+    topNavWrapper.scrollTo({ left: Math.max(offsetLeft - paddingLeft, 0), behavior: 'smooth' });
+  }
+
+  // Observe sections to update active link on manual scroll
+  const observerOptions = {
+    root: null,
+    rootMargin: `-${getHeaderOffset()}px 0px -60% 0px`,
+    threshold: [0, 0.25, 0.5, 0.75, 1],
+  };
+
+  const linkById = {};
+  navLinks.forEach((l) => { const id = idForLink(l); if (id) linkById[id] = l; });
+
+  let lastActiveId = null;
+  const onIntersect = (entries) => {
+    // Pick the section with the highest intersection ratio that is intersecting
+    let best = { id: null, ratio: 0 };
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      const id = entry.target.id;
+      if (entry.intersectionRatio > best.ratio) best = { id, ratio: entry.intersectionRatio };
+    });
+
+    if (best.id && best.id !== lastActiveId) {
+      lastActiveId = best.id;
+      const link = linkById[best.id];
+      if (link) {
+        setActiveLink(link);
+        // Ensure the active link is aligned to the left on small screens
+        scrollNavLinkIntoView(link, 'start');
+      }
+    }
+  };
+
+  const observer = new IntersectionObserver(onIntersect, observerOptions);
+  sectionsMap.forEach((section) => observer.observe(section));
+
+  // CSS smooth behavior via style (modern browsers)
+  document.documentElement.style.scrollBehavior = 'smooth';
